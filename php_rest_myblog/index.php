@@ -7,7 +7,7 @@ $res = new ReservationController();
 $user = new userController();
 
 
-$pages = ['addReservation','getReservations','deleteReservation','getSingleReservation','updateReservation','vue.php','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
+$pages = ['addReservation','getReservations','getUserReservations','deleteReservation','getSingleReservation','updateReservation','auth','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
 // $parts = explode('/',$_GET['page']);
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){

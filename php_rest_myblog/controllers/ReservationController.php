@@ -82,6 +82,44 @@ class ReservationController{
         }
     }
 
+    public function getUserReservations(){
+        $data = json_decode(file_get_contents("php://input"));
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+        // Instantiate reservation object
+        $reservation = new Reservations($db);
+
+        // Get ref
+        // $reservation->ref = isset($_GET['ref']) ? $_GET['ref'] : die();
+
+        // Get post
+        $res = $reservation->readRef($data->ref);
+
+        // Make JSON
+        print_r(json_encode($res));
+    }
+
+
+    public function getSingleReservation(){
+        $data = json_decode(file_get_contents("php://input"));
+        // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+        // Instantiate reservation object
+        $reservation = new Reservations($db);
+
+        // Get ref
+        // $reservation->ref = isset($_GET['ref']) ? $_GET['ref'] : die();
+
+        // Get post
+        $res = $reservation->read_single($data->id);
+
+        
+        // Make JSON
+        print_r(json_encode($res));
+    }
+
     public function deleteReservation(){
         // Instantiate DB & connect
         $database = new Database();
@@ -107,31 +145,6 @@ class ReservationController{
             );
         }
     }    
-    public function getSingleReservation(){
-        $data = json_decode(file_get_contents("php://input"));
-        // Instantiate DB & connect
-        $database = new Database();
-        $db = $database->connect();
-        // Instantiate reservation object
-        $reservation = new Reservations($db);
-
-        // Get ref
-        // $reservation->ref = isset($_GET['ref']) ? $_GET['ref'] : die();
-
-        // Get post
-        $res = $reservation->read_single($data->id);
-
-        // Create array
-        // $reservation_arr = array(
-        // 'id' => $reservation->id,
-        // 'date' => $reservation->date,
-        // 'creneau' => $reservation->creneau,
-        // 'ref' => $reservation->ref
-        // );
-
-        // Make JSON
-        print_r(json_encode($res));
-    }
 
     public function updateReservation(){
         // Instantiate DB & connect

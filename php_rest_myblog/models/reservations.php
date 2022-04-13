@@ -37,6 +37,34 @@
       return $stmt;
     }
 
+    // Get reservations by ref
+    public function readRef($ref) {
+      // Create query
+      $query = 'SELECT
+        id,
+        date,
+        creneau,
+        ref
+      FROM
+        ' . $this->table . ' where ref = ?
+      ORDER BY
+        date ,  creneau';
+
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        //bind values
+        $stmt->bindParam(1, $ref);
+        
+      // Execute query
+      $stmt->execute();
+
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
     // Get Single Category
   public function read_single($id){
     // Create query
@@ -60,11 +88,6 @@
 
       return $stmt->fetch(PDO::FETCH_ASSOC);
 
-      // set properties
-      // $this->ref = $row['ref'];
-      // $this->date = $row['date'];
-      // $this->id = $row['id'];
-      // $this->creneau = $row['creneau'];
 }
 
 // Create reservation

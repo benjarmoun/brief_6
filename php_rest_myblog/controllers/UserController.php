@@ -5,16 +5,39 @@
   header('Access-Control-Allow-Methods: POST, DELETE, PUT');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-//   include_once '../../config/Database.php';
-//   include_once '../../models/user.php';
+
 
   class UserController{
+	public function auth(){
+		// Instantiate DB & connect
+		$database = new Database();
+		$db = $database->connect();
+  
+		// Instantiate  user object
+		$user = new User($db);
+  
+		// Get posted data
+		$data = json_decode(file_get_contents("php://input"),true);
+    // die(var_dump($data));
+            $user = new User($db);
+            $result = $user->login($data);
+            // $result = User::login($data);
+            if($result->ref === $data['ref'] && $result->nom === $data['nom'] ){
+                
+				echo json_encode($result);
+            }else{
+                echo json_encode(
+                    array('message' => 'Login Failed')
+                );
+            }
+    }
+
     public function addUser(){
       // Instantiate DB & connect
       $database = new Database();
       $db = $database->connect();
 
-      // Instantiate blog user object
+      // Instantiate  user object
       $user = new User($db);
 
       // Get posted data
@@ -69,7 +92,7 @@
       $database = new Database();
       $db = $database->connect();
 
-      // Instantiate blog user object
+      // Instantiate  user object
       $user = new User($db);
 
       // Get ID
@@ -140,7 +163,7 @@
       $database = new Database();
       $db = $database->connect();
 
-      // Instantiate blog user object
+      // Instantiate  user object
       $user = new User($db);
 
       // Get raw posted data

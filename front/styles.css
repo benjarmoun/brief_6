@@ -1,8 +1,8 @@
 :root {
-  --main-bg-color: #e90000;
-  --main-text-color: #000000;
-  --second-text-color: #000000;
-  --second-bg-color: #ff9900;
+  --main-bg-color: #009d63;
+  --main-text-color: #009d63;
+  --second-text-color: #bbbec5;
+  --second-bg-color: #c1efde;
 }
 
 .primary-text {
@@ -10,7 +10,7 @@
 }
 
 .second-text {
-  color: var(--second-text-color);  
+  color: var(--second-text-color);
 }
 
 .primary-bg {
@@ -29,7 +29,7 @@
   overflow-x: hidden;
   background-image: linear-gradient(
     to right,
-    #00ff84,
+    #baf3d7,
     #c2f5de,
     #cbf7e4,
     #d4f8ea,
@@ -38,14 +38,12 @@
 } */
 
 #sidebar-wrapper {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
-  position: sticky;
-  height: auto;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -79,6 +77,11 @@
   color: var(--main-text-color);
   font-weight: bold;
   border: none;
+}
+table thead tr th,
+table tbody tr td{
+  text-align: center;
+  justify-content: center;
 }
 
 @media (min-width: 768px) {
