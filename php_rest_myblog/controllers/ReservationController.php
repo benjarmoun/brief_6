@@ -36,6 +36,7 @@ class ReservationController{
             );
         }
     }
+
     public function getReservations(){
 
         // Instantiate DB & connect
@@ -70,6 +71,7 @@ class ReservationController{
                 // Push to "data"
                 array_push($cat_arr['data'], $cat_item);
             }
+            die(print_r($cat_arr));
 
             // Turn to JSON & output
             echo json_encode($cat_arr);
@@ -82,6 +84,47 @@ class ReservationController{
         }
     }
 
+    public function getDayReservations(){
+
+        $data = json_decode(file_get_contents("php://input"));
+        // die(var_dump($data->date));
+            // Instantiate DB & connect
+        $database = new Database();
+        $db = $database->connect();
+            // Instantiate reservation object
+        $reservation = new Reservations($db);
+            // reservation read query
+        $result = $reservation->read_day($data->date);
+        // die(var_dump($result));
+            // Get row count
+        $num = $result->rowCount();
+            // Check if any categories
+        if($num > 0) {
+                // Cat array
+            $cat_arr = array();
+            $cat_arr['data'] = array();
+            $creneau_array = array();
+
+            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+
+                $cat_item = array(
+                'creneau' => $creneau
+                );
+                    // Push to "data"
+                array_push($cat_arr['data'], $cat_item);
+            }
+                // Turn to JSON & output
+            echo json_encode($cat_arr);
+            // print_r($cat_arr);
+        } else {
+            // No Reservations
+            echo json_encode(
+                array('message' => 'No Reservations Found')
+            );
+        }
+    }
+
     public function getUserReservations(){
         $data = json_decode(file_get_contents("php://input"));
         // Instantiate DB & connect
@@ -89,9 +132,6 @@ class ReservationController{
         $db = $database->connect();
         // Instantiate reservation object
         $reservation = new Reservations($db);
-
-        // Get ref
-        // $reservation->ref = isset($_GET['ref']) ? $_GET['ref'] : die();
 
         // Get post
         $res = $reservation->readRef($data->ref);

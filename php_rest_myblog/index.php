@@ -7,7 +7,7 @@ $res = new ReservationController();
 $user = new userController();
 
 
-$pages = ['addReservation','getReservations','getUserReservations','deleteReservation','getSingleReservation','updateReservation','auth','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
+$pages = ['addReservation','getReservations','getDayReservations','getUserReservations','deleteReservation','getSingleReservation','updateReservation','auth','addUser','deleteUser','getSingleUser','getUsers','updateUser'];
 // $parts = explode('/',$_GET['page']);
 // print_r($parts) ;
 // if(isset($_SESSION['log']) && $_SESSION['log'] === true){
@@ -27,11 +27,11 @@ $pages = ['addReservation','getReservations','getUserReservations','deleteReserv
                 // include('./views/includes/404.php');
                 echo "not found";
             }
-        }else{
-            // $home->index();
-            $res->readReservation();
-
         }
+        // else{
+        //     // $home->index();
+        //     $res->readReservation();
+        // }
         
     // }else
     //     if( isset($_GET['page']) && $_GET['page'] === 'register'){ 

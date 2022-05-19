@@ -15,6 +15,7 @@
       $this->conn = $db;
     }
 
+
     // Get reservations
     public function read() {
       // Create query
@@ -34,6 +35,30 @@
       // Execute query
       $stmt->execute();
 
+      return $stmt;
+    }
+
+    // Get reservations of one day
+    public function read_day($day) { 
+      // Create query
+      $query = 'SELECT
+        id,
+        date,
+        creneau,
+        ref
+      FROM
+        ' . $this->table . ' where date = :date
+      ORDER BY
+        creneau';
+
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(':date', $day);
+        // Execute query
+      $result= $stmt->execute();
+      // die(print_r($stmt));
       return $stmt;
     }
 

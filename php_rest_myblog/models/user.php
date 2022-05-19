@@ -47,35 +47,50 @@
 
       //   return $stmt;
       // }
-      public function login($data)
-      {
-          $ref = $data['ref'];
-          // die();
-          // die(print_r($data));
+
+
+    //   public function login($data)
+    //   {
+    //       $ref = $data['ref'];
+    //       // die();
+    //       // die(print_r($data));
       
-          $query = 'SELECT * FROM user WHERE ref = :ref';
+    //       $query = 'SELECT * FROM user WHERE ref = :ref';
 
-          $DB = new Database ;
-          $stmt = $DB->connect()->prepare($query);
-          $stmt->execute(array(":ref" => $ref));
-          $user = $stmt->fetch(PDO::FETCH_OBJ);
-          return $user;
-          if ($stmt->execute()) {
-              return 'OK';
-          }
-      
+    //       $DB = new Database ;
+    //       $stmt = $DB->connect()->prepare($query);
+    //       $stmt->execute(array(":ref" => $ref));
+    //       $user = $stmt->fetch(PDO::FETCH_OBJ);
+    //       return $user;
+    //       if ($stmt->execute()) {
+    //           return 'OK';
+    //       }
+    //   }
 
+       //create a function to do login with ref and nom
+         public function login($data)
+         {
+              $ref = $data['ref'];
+              $nom = $data['nom'];
+              // die();
+              // die(print_r($data));
+              
+              $query = 'SELECT * FROM user WHERE ref = :ref AND nom = :nom';
+    
+              $DB = new Database ;
+              $stmt = $DB->connect()->prepare($query);
+              $stmt->execute(array(":ref" => $ref, ":nom" => $nom));
+              $user = $stmt->fetch(PDO::FETCH_OBJ);
+            //   die(print_r($user));
+              return $user;
 
+              if ($stmt->execute()) {
+                return 'OK';
+              }
+         }
+         
 
-
-          // $req='SELECT * FROM user WHERE ref = :ref';
-      // $DB = new Database ;
-      // $stmt=$DB->conn()->prepare($req);
-      // $stmt-> binParam(1,$this->ref);
-      // $stmt->execute();
-      // $user = $stmt->fetch(PDO::FETCH_ASSOC);
-      // return $user;
-      }
+    
 
       // Get Single user
       public function read_single($ref)

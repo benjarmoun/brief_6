@@ -1,10 +1,17 @@
+window.addEventListener('load', checkloggedin);
+function checkloggedin() {
+  if (!localStorage.getItem('ref')) {
+    window.location.href = './login.html';
+  }
+}
 
 let r = JSON.parse(localStorage.getItem('ref'))
 // console.log(r);
 document.getElementById('refe').innerHTML = r.ref;
 document.getElementById("nom").innerHTML = r.nom;
 
-
+// let r = JSON.parse(localStorage.getItem('ref'))
+                console.log(r.message);
 
 
 
@@ -41,7 +48,7 @@ fetch("http://localhost/brief_6/php_rest_myblog/getUserReservations", requestOpt
         }else if(res.creneau == 5){
             res.creneau = '15h-16h';
         }else if(res.creneau == 6){
-            res.creneau = '8h-9h';
+            res.creneau = '16h-17h';
         }
         html+=`
         <tr>
