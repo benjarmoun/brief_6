@@ -1,14 +1,8 @@
 const queryString = window.location.search; 
 const urlParams = new URLSearchParams(queryString);
-// const reff = urlParams.get('ref');
-// const datt = urlParams.get('date');
-// console.log(reff)
-// console.log(datt)
-// document.getElementById("id").value = ID;
 
 
 //check if date is valid
-// var dataA = [];
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("Cookie", "PHPSESSID=t1ji7hl1p555j9edko23blbvfj");
@@ -24,24 +18,6 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-// async function getdata() {
-//     const response = await fetch("http://localhost/brief_6/php_rest_myblog/getReservations");
-//     const data = await response.json();
-//     console.log(data);
-//     // if (dataA.message == 'Date is not valid') {
-//     //     alert('Date is not valid');
-//     // } else {
-//     //     if (!dataA.error) {
-//     //         document.getElementById("date").value = urlParams.get('date');
-//     //         document.getElementById("creneau").value = urlParams.get('creneau');
-//     //     } else {
-//     //         window.location.href = "./login.html";
-//     //         alert("aaaaa");
-//     //     }
-//     // }
-// }
-
-// getdata();
 
 fetch("http://localhost/brief_6/php_rest_myblog/getDayReservations", requestOptions)
   .then(response => response.text())
@@ -50,6 +26,7 @@ fetch("http://localhost/brief_6/php_rest_myblog/getDayReservations", requestOpti
       const myArr = JSON.parse(result);
         console.log(myArr.data);
         
+        //disable already reserved creneaux
         document.querySelectorAll("#creneau option").forEach(opt => {
             for(let i = 0; i < myArr.data.length; i++) {
                 if(opt.value == myArr.data[i].creneau) {
@@ -57,21 +34,15 @@ fetch("http://localhost/brief_6/php_rest_myblog/getDayReservations", requestOpti
                     opt.remove();
                 }
             }
-            // if (myArr.data[].creneau.includes(opt.value))
-            // {
-            //   opt.disabled = true;
-            // }
         });
   })
   .catch(error => console.log('error', error));
 // console.log(dataA);
-//disable already reserved creneaux
 
 
 let r = JSON.parse(localStorage.getItem('ref'));
 document.getElementById('refe').innerHTML = r.ref;
 document.getElementById("nom").innerHTML = r.nom;
-// document.getElementById('ref').value = r.ref;
 
 const form =document.querySelector('.my-form');
 form.addEventListener('submit',function (e){

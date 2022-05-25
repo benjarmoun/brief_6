@@ -31,14 +31,14 @@ const form =document.querySelector('.my-form');
         .then(response => response.json())
             .then(result => {
                 // let r = JSON.parse(localStorage.getItem('ref'))
-                console.log(r.message);
+                // console.log(r.message);
                 if (result.message == 'Login Failed') {
                     alert('Login Failed');
                 } else {
                 if(!result.error){
+                  // console.log(result);
               localStorage.setItem('ref', JSON.stringify(result));
-              console.log(result);
-              // window.location.href = "./home.html";
+              window.location.href = "./home.html";
                 }else{
                     window.location.href = "./login.html";
                     alert("aaaaa");

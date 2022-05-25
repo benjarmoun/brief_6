@@ -27,6 +27,8 @@ const form =document.querySelector('.my-form');
         const Prenom=document.querySelector('.prenom').value;
         const Naissance=document.querySelector('.date_naissance').value;
         const ref=document.querySelector('.ref').value;
+        const ref2=document.querySelector('.ref');
+
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -48,6 +50,9 @@ const form =document.querySelector('.my-form');
 
         fetch("http://localhost/brief_6/php_rest_myblog/addUser", requestOptions)
         .then(response => response.text())
-        .then(result => alert(result))
+        .then(result =>{ 
+            console.log(result);
+            alert("Votre compte a été créé avec succès votre référence est : "+ref2.value);
+        })
         .catch(error => console.log('error', error));
     })

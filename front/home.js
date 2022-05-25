@@ -10,11 +10,6 @@ let r = JSON.parse(localStorage.getItem('ref'))
 document.getElementById('refe').innerHTML = r.ref;
 document.getElementById("nom").innerHTML = r.nom;
 
-// let r = JSON.parse(localStorage.getItem('ref'))
-                console.log(r.message);
-
-
-
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "text/plain");
 myHeaders.append("Cookie", "PHPSESSID=uobkckoklbhok2hhc7m38uq5st");
@@ -70,7 +65,7 @@ fetch("http://localhost/brief_6/php_rest_myblog/getUserReservations", requestOpt
 })
   .catch(error => console.log('error', error));
 
-
+// delete reservation fuction
 function myFunction($id){
     //   console.log($id);
     var myHeaders = new Headers();
